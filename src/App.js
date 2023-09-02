@@ -1,23 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import Root from "./pages/Root";
+import ShoppingLists, {loader as shoppingListsLoader } from './pages/ShoppingLists';
+import ShoppingList, {loader as shoppingListLoader } from './pages/ShoppingList';
+import ErrorPage from "./pages/error/error-page";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <ShoppingLists />,
+        loader: shoppingListsLoader,
+      },
+      {
+        path: "shopping-lists/:shoppingListId",
+        element: <ShoppingList />,
+        loader: shoppingListLoader,
+      },
+    ]
+  },
+]);
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='h-screen bg-gray-50 dark:bg-gray-900'>
+      <div className='max-w-screen-xl mx-auto w-full'>
+        <RouterProvider router={router} />
+      </div>
     </div>
   );
 }
