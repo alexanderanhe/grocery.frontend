@@ -2,6 +2,8 @@ import './App.css';
 import Root from "./pages/Root";
 import ShoppingLists, {loader as shoppingListsLoader } from './pages/ShoppingLists';
 import ShoppingList, {loader as shoppingListLoader } from './pages/ShoppingList';
+import New from './pages/New';
+import { loader as CategoriesLoader} from './pages/Categories';
 import ErrorPage from "./pages/error/error-page";
 
 import {
@@ -24,6 +26,11 @@ const router = createBrowserRouter([
         path: "shopping-lists/:shoppingListId",
         element: <ShoppingList />,
         loader: shoppingListLoader,
+      },
+      {
+        path: "new",
+        element: <New />,
+        loader: CategoriesLoader,
       },
     ]
   },
