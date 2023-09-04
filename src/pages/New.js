@@ -1,6 +1,14 @@
 import React, { Fragment, useMemo, useState } from 'react'
 import { ChevronUpIcon, ChevronDownIcon, PlusCircleIcon, MinusCircleIcon } from '@heroicons/react/24/solid';
 import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  LeadingActions,
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+  TrailingActions,
+  Type as ListType,
+} from 'react-swipeable-list';
 import { useLoaderData } from 'react-router-dom';
 
 export default function New() {
@@ -38,6 +46,29 @@ export default function New() {
     [categories, search]
   );
 
+  const leadingActions = () => (
+    <LeadingActions>
+      <SwipeAction
+        destructive={true}
+        className="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded"
+        onClick={() => console.info('swipe action triggered')}
+      >
+        Delete
+      </SwipeAction>
+    </LeadingActions>
+  );
+  
+  const trailingActions = () => (
+    <TrailingActions>
+      <SwipeAction
+        onClick={() => console.info('swipe action triggered')}
+        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+      >
+        Edit
+      </SwipeAction>
+    </TrailingActions>
+  );
+
   return (
     <>
       <div className="">
@@ -62,6 +93,57 @@ export default function New() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <SwipeableList
+          fullSwipe={true}
+          threshold={0.5}
+          type={ListType.IOS}
+        >
+          {filteredUsers?.map((category) => (
+            <Fragment key={`${category._id}`}>
+              <SwipeableListItem
+                leadingActions={leadingActions()}
+                trailingActions={trailingActions()}
+                onClick={() => setShow({...show, [category._id]: !show[category._id]})}
+              >
+                <h2 className="w-full">
+                  <button
+                    type="button"
+                    className="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  >
+                    <span>{ category.name }</span>
+                    { show[category._id] ? (
+                        <ChevronDownIcon className="w-5 h-5 text-blue-500" />
+                      ) : (
+                        <ChevronUpIcon className="w-5 h-5 text-blue-500" />
+                    ) }
+                  </button>
+                </h2>
+              </SwipeableListItem>
+              <div className={show[category._id] ? '' : 'hidden' }>
+                <div className="px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                  { category?.children?.map((sbcategory) => (
+                    <div key={sbcategory._id} className='flex text-gray-900 dark:text-white gap-2'>
+                      { shoppingList.some(({ category, count }) => category?.localeCompare(sbcategory._id) === 0 && count ) && (
+                        <>
+                          <button type="button" onClick={handleCreate(sbcategory._id, -1)} className="mb-2 text-gray-500 dark:text-gray-400 flex gap-2">
+                            <MinusCircleIcon className="w-6 h-6" />
+                          </button>
+                          { shoppingList.find(({ category, count }) => category?.localeCompare(sbcategory._id) === 0 && count )?.count || 0 }
+                        </>
+                      )}
+                      <button type="button" onClick={handleCreate(sbcategory._id, 1)} className="mb-2 text-gray-500 dark:text-gray-400 flex gap-2">
+                        <PlusCircleIcon className="w-6 h-6" />
+                      </button>
+                      { sbcategory.name }
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Fragment>
+          ))}
+        </SwipeableList>
       </div>
       <div id="accordion-collapse" data-accordion="collapse">
         {filteredUsers?.map((category) => (

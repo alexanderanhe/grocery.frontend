@@ -1,3 +1,4 @@
+import 'react-swipeable-list/dist/styles.css';
 import './App.css';
 import Root from "./pages/Root";
 import ShoppingLists, {loader as shoppingListsLoader } from './pages/ShoppingLists';
