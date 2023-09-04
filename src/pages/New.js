@@ -35,7 +35,7 @@ export default function New() {
       );
       return children.length ? {...category, children} : null;
     }).filter((child) => child),
-    [search]
+    [categories, search]
   );
 
   return (
