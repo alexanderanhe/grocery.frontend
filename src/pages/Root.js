@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { ArrowLeftIcon } from '@heroicons/react/24/solid';
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import { QuestionMarkCircleIcon, UserIcon } from '@heroicons/react/24/outline';
 
 export default function Root() {
   const location = useLocation();
@@ -30,7 +30,11 @@ export default function Root() {
             )}
           </li>
           <li className='flex-auto flex items-center justify-center uppercase text-[12px]'>Shopping List</li>
-          <li className='w-9'></li>
+          <li className='w-9 flex-none bg-[#41c0b6] rounded-full p-2'>
+            <Link to={"/profile"} className="font-medium">
+              <UserIcon className="h-5 w-5" />
+            </Link>
+          </li>
         </ul>
         <div className='flex-1 flex items-center justify-center font-bold text-lg p-5'>
           3 Items Added
@@ -47,7 +51,7 @@ export default function Root() {
       <footer className='bg-[#0b0e32] dark:bg-[#fffaf0]'>
         <div
           style={{ borderRadius: '60px / 100%', borderTopLeftRadius: '0', borderTopRightRadius: '0' }}
-          className='flex-auto bg-white dark:bg-black p-4 pb-6'
+          className='flex-auto bg-white dark:bg-black border-none p-4 pb-6'
         ></div>
         <div className='flex flex-col items-center justify-items-center text-stone-600 p-4'>
           Developed by Alexander Angulo

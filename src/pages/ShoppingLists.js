@@ -36,7 +36,7 @@ export default function ShoppingLists() {
         ))}
       </div>
       <div>
-        <Link to={`new`} class="block w-fit mx-auto my-0 bg-[#3cb9b0] text-white py-3 px-4 rounded-full">
+        <Link to={`new`} className="block w-fit mx-auto my-0 bg-[#3cb9b0] text-white py-3 px-4 rounded-full">
           Create new shopping list
         </Link>
       </div>

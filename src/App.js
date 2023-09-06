@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import 'react-swipeable-list/dist/styles.css';
 import './App.css';
 import Root from "./pages/Root";
 import ShoppingLists, {loader as shoppingListsLoader } from './pages/ShoppingLists';
 import ShoppingList, {loader as shoppingListLoader } from './pages/ShoppingList';
+import Profile, {loader as profileLoader } from './pages/Profile';
 import New from './pages/New';
 import { loader as CategoriesLoader} from './pages/Categories';
 import ErrorPage from "./pages/error/error-page";
@@ -24,6 +26,11 @@ const router = createBrowserRouter([
         loader: shoppingListsLoader,
       },
       {
+        path: "/profile",
+        element: <Profile />,
+        loader: profileLoader,
+      },
+      {
         path: "shopping-lists/:shoppingListId",
         element: <ShoppingList />,
         loader: shoppingListLoader,
@@ -39,16 +46,25 @@ const router = createBrowserRouter([
 
 
 function App() {
-  return (
-    <div
-      // className='h-screen bg-gray-50 dark:bg-gray-900'
-    >
-      <div
-        // className='max-w-screen-xl mx-auto w-full'
-      >
-        <RouterProvider router={router} />
-      </div>
-    </div>
+  const theme = localStorage.theme;
+  const element = document.documentElement;
+  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function onWindowMatch() {
+    if (
+      localStorage.theme === 'dark' ||
+      (!("theme" in localStorage) && darkQuery.matches)
+    ) {
+      element.classList.add('dark');
+    } else {
+      element.classList.remove('dark');
+    }
+  }
+
+  useEffect(() => onWindowMatch(), [theme]);
+
+  return (  
+    <RouterProvider router={router} />
   );
 }
 
