@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import 'react-swipeable-list/dist/styles.css';
 import './App.css';
 import Root from "./pages/Root";
@@ -50,7 +50,7 @@ function App() {
   const element = document.documentElement;
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-  function onWindowMatch() {
+  const onWindowMatch = useCallback(() => {
     if (
       localStorage.theme === 'dark' ||
       (!("theme" in localStorage) && darkQuery.matches)
@@ -59,9 +59,9 @@ function App() {
     } else {
       element.classList.remove('dark');
     }
-  }
+  });
 
-  useEffect(() => onWindowMatch(), [theme]);
+  useEffect(() => onWindowMatch(), [theme, onWindowMatch]);
 
   return (  
     <RouterProvider router={router} />
