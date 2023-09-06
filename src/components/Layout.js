@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { Link } from 'react-router-dom'
 
 export default function Layout({ TitleContent, FooterContent, children }) {
   const roundedTopRight = { borderRadius: '0 60px / 50px', borderBottomLeftRadius: '0' };
