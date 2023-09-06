@@ -1,6 +1,9 @@
 import React from 'react';
 import { useLoaderData, Link } from "react-router-dom";
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Layout from '../components/Layout';
 
 const getShoppingList = async () => {
   try {
@@ -18,28 +21,38 @@ export async function loader() {
 
 export default function ShoppingLists() {
   const { shoppingLists } = useLoaderData();
-  console.log(shoppingLists);
-    
+
+  const roundedTopRight = { borderRadius: '0 60px / 50px', borderBottomLeftRadius: '0' };
+
+  const FooterContentContainer = () => (
+    <Link to={`new-shopping-list`} className="block w-fit mx-auto my-0 bg-[#3cb9b0] text-white py-3 px-4 rounded-full">
+      Create new shopping list
+    </Link>
+  );
+
   return (
-    <div
-      className='absolute inset-0 flex flex-col'
-      // className="h-full relative overflow-x-auto shadow-md sm:rounded-lg flex flex-col"
+    <Layout
+      TitleContent={() => `${shoppingLists.length} items`}
+      FooterContent={FooterContentContainer}
     >
-      <div className='flex-auto'>
-        { shoppingLists?.map((item, index) => (
-          <h2 key={`item-${index}${item._id}`}>
-            <Link to={`shopping-lists/${item._id}`} className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border ${index !== shoppingLists.length - 1 ? 'border-b-0' : ''} border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800`}>
-              <span>{ item.name }</span>
-              <ChevronRightIcon className="h-6 w-6 text-blue-500" />
-            </Link>
-          </h2>
-        ))}
+      <div
+        className='absolute inset-0 flex flex-col'
+      >
+        <div className='flex-auto'>
+          { shoppingLists?.map((item, index) => (
+            <h2 key={`item-${index}${item._id}`}>
+              <Link
+                to={`shopping-lists/${item._id}`}
+                style={roundedTopRight}
+                className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 ${index ? 'border-t' : ''}  border-gray-200 rounded-t-xl dark:border-gray-700 dark:text-gray-400`}
+              >
+                <span>{ item.name }</span>
+                <ChevronRightIcon className="h-6 w-6 text-blue-500" />
+              </Link>
+            </h2>
+          ))}
+        </div>
       </div>
-      <div>
-        <Link to={`new`} className="block w-fit mx-auto my-0 bg-[#3cb9b0] text-white py-3 px-4 rounded-full">
-          Create new shopping list
-        </Link>
-      </div>
-    </div>
+    </Layout>
   )
 }

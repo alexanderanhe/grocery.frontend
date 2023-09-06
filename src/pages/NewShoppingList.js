@@ -12,8 +12,9 @@ import {
   Type as ListType,
 } from 'react-swipeable-list';
 import { useLoaderData } from 'react-router-dom';
+import Layout from '../components/Layout';
 
-export default function New() {
+export default function NewShoppingList() {
   const { categories } = useLoaderData();
   const [ show, setShow ] = useState({});
   const [ shoppingList, setShoppingList ] = useState([]);
@@ -71,29 +72,38 @@ export default function New() {
     </TrailingActions>
   );
 
+  const FooterContentContainer = () => (
+    <button type='submit' className="block w-fit mx-auto my-0 bg-[#3cb9b0] text-white py-3 px-4 rounded-full">
+      Create Shopping list
+    </button>
+  );
+
   return (
-    <>
-      <div className="">
-        <div className="relative sm:rounded-lg">
-          <div className="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
-            <div className="w-full md:w-1/2">
-              <form className="flex items-center">
-                <label htmlFor="simple-search" className="sr-only">Search</label>
-                <div className="relative w-full">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <MagnifyingGlassIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                  </div>
-                  <input type="text" value={search} onChange={handleSearch} className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="" />
+    <Layout
+      TitleContent={() => (
+        <input type="text" className="bg-[#41c0b6] text-center text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-300" placeholder="Name *" autoFocus required />
+      )}
+      FooterContent={FooterContentContainer}
+    >
+      <div className="relative sm:rounded-lg">
+        <div className="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+          <div className="w-full md:w-1/2">
+            <form className="flex items-center">
+              <label htmlFor="simple-search" className="sr-only">Search</label>
+              <div className="relative w-full">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <MagnifyingGlassIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                 </div>
-              </form>
-            </div>
-            {/* <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
-              <button type="button" className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                <PlusIcon className="h-3.5 w-3.5 mr-2" />
-                Add category
-              </button>
-            </div> */}
+                <input type="text" value={search} onChange={handleSearch} className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="" />
+              </div>
+            </form>
           </div>
+          {/* <div className="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+            <button type="button" className="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+              <PlusIcon className="h-3.5 w-3.5 mr-2" />
+              Add category
+            </button>
+          </div> */}
         </div>
       </div>
       <SwipeableList type={ListType.IOS}>
@@ -154,6 +164,6 @@ export default function New() {
           </Fragment>
         ))}
       </SwipeableList>
-    </>
+    </Layout>
   )
 }

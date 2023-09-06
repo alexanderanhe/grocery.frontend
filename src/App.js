@@ -5,7 +5,7 @@ import Root from "./pages/Root";
 import ShoppingLists, {loader as shoppingListsLoader } from './pages/ShoppingLists';
 import ShoppingList, {loader as shoppingListLoader } from './pages/ShoppingList';
 import Profile, {loader as profileLoader } from './pages/Profile';
-import New from './pages/New';
+import NewShoppingList from './pages/NewShoppingList';
 import { loader as CategoriesLoader} from './pages/Categories';
 import ErrorPage from "./pages/error/error-page";
 
@@ -36,8 +36,8 @@ const router = createBrowserRouter([
         loader: shoppingListLoader,
       },
       {
-        path: "new",
-        element: <New />,
+        path: "new-shopping-list",
+        element: <NewShoppingList />,
         loader: CategoriesLoader,
       },
     ]
