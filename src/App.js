@@ -13,6 +13,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Help from './pages/Help';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
         loader: profileLoader,
+      },
+      {
+        path: "/help",
+        element: <Help />,
       },
       {
         path: "shopping-lists/:shoppingListId",

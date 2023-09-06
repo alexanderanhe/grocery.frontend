@@ -30,7 +30,7 @@ export default function ShoppingLists() {
 
   return (
     <Layout
-      TitleContent={() => `${shoppingLists.length} items`}
+      TitleContent={() => shoppingLists.length ? `${shoppingLists.length} items` : 'Empty'}
       FooterContent={FooterContentContainer}
     >
       <div
