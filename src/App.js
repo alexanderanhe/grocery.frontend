@@ -52,16 +52,16 @@ function App() {
 
   const onWindowMatch = useCallback(() => {
     if (
-      localStorage.theme === 'dark' ||
+      theme === 'dark' ||
       (!("theme" in localStorage) && darkQuery.matches)
     ) {
       element.classList.add('dark');
     } else {
       element.classList.remove('dark');
     }
-  });
+  }, [ element.classList, darkQuery.matches, theme ]);
 
-  useEffect(() => onWindowMatch(), [theme, onWindowMatch]);
+  useEffect(() => onWindowMatch(), [ onWindowMatch ]);
 
   return (  
     <RouterProvider router={router} />
