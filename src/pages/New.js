@@ -1,6 +1,8 @@
 import React, { Fragment, useMemo, useState } from 'react'
 import { ChevronUpIcon, ChevronDownIcon, PlusCircleIcon, MinusCircleIcon } from '@heroicons/react/24/solid';
-import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  // PlusIcon, 
+  MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import {
   LeadingActions,
   SwipeableList,
@@ -94,11 +96,7 @@ export default function New() {
           </div>
         </div>
       </div>
-      <SwipeableList
-          fullSwipe={false}
-          // threshold={0.5}
-          type={ListType.IOS}
-        >
+      <SwipeableList type={ListType.IOS}>
         {filteredUsers?.map((category) => (
           <Fragment key={`${category._id}`}>
             <SwipeableListItem
