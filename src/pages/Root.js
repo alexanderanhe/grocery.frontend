@@ -5,6 +5,11 @@ import { QuestionMarkCircleIcon, UserIcon } from '@heroicons/react/24/outline';
 
 export default function Root() {
   const location = useLocation();
+  const path = location.pathname.substring(1);
+  const pageTitle = path.search("/") >= 0
+    ? path.substring(0, path.search("/")).replaceAll('-', ' ')
+    : path;
+
   return (
     <div
       className='flex flex-col min-h-screen bg-white dark:bg-black'
@@ -29,7 +34,9 @@ export default function Root() {
               </Link>
             )}
           </li>
-          <li className='flex-auto flex items-center justify-center uppercase text-[12px]'>Shopping List</li>
+          <li className='flex-auto flex items-center justify-center uppercase text-[12px]'>
+            { pageTitle || 'Shopping Lists' }
+          </li>
           <li className='w-9 flex-none bg-[#41c0b6] rounded-full p-2'>
             <Link to={"/profile"} className="font-medium">
               <UserIcon className="h-5 w-5" />
