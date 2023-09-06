@@ -1,8 +1,6 @@
 import React from 'react';
 import { useLoaderData, Link } from "react-router-dom";
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Layout from '../components/Layout';
 
 const getShoppingList = async () => {
