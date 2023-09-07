@@ -2,6 +2,7 @@ import React from 'react';
 import { useLoaderData, Link } from "react-router-dom";
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import Layout from '../components/Layout';
+import Header from '../components/Header';
 
 const getShoppingList = async () => {
   try {
@@ -28,29 +29,31 @@ export default function ShoppingLists() {
     </Link>
   );
 
+  const TitleContent = () => shoppingLists.length
+    ? `${shoppingLists.length} items` : 'Empty'
   return (
-    <Layout
-      TitleContent={() => shoppingLists.length ? `${shoppingLists.length} items` : 'Empty'}
-      FooterContent={FooterContentContainer}
-    >
-      <div
-        className='absolute inset-0 flex flex-col'
-      >
-        <div className='flex-auto'>
-          { shoppingLists?.map((item, index) => (
-            <h2 key={`item-${index}${item._id}`}>
-              <Link
-                to={`shopping-lists/${item._id}`}
-                style={roundedTopRight}
-                className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 ${index ? 'border-t' : ''}  border-gray-200 rounded-t-xl dark:border-gray-700 dark:text-gray-400`}
-              >
-                <span>{ item.name }</span>
-                <ChevronRightIcon className="h-6 w-6 text-blue-500" />
-              </Link>
-            </h2>
-          ))}
+    <>
+      <Header><TitleContent/></Header>
+      <Layout FooterContent={FooterContentContainer}>
+        <div
+          className='absolute inset-0 flex flex-col'
+        >
+          <div className='flex-auto'>
+            { shoppingLists?.map((item, index) => (
+              <h2 key={`item-${index}${item._id}`}>
+                <Link
+                  to={`shopping-lists/${item._id}`}
+                  style={roundedTopRight}
+                  className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 ${index ? 'border-t' : ''}  border-gray-200 rounded-t-xl dark:border-gray-700 dark:text-gray-400`}
+                >
+                  <span>{ item.name }</span>
+                  <ChevronRightIcon className="h-6 w-6 text-blue-500" />
+                </Link>
+              </h2>
+            ))}
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }

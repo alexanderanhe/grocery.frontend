@@ -1,12 +1,10 @@
 import React from 'react'
-import Header from './Header'
 import Footer from './Footer'
 
-export default function Layout({ TitleContent, FooterContent, children }) {
+export default function Layout({ FooterContent, children }) {
   const roundedTopRight = { borderRadius: '0 60px / 50px', borderBottomLeftRadius: '0' };
   return (
     <>
-      <Header><TitleContent/></Header>
       <div className='flex-auto flex flex-col h-full bg-[#3cb9af]'>
         <div
           style={roundedTopRight}

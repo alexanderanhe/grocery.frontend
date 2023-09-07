@@ -1,13 +1,17 @@
 import React from 'react'
 import Layout from '../components/Layout'
+import Header from '../components/Header'
 
 export default function Help() {
   return (
-    <Layout
-    TitleContent={() => (<></>)}
-    FooterContent={() => (<></>)}
-  >
-    <div>Help</div>
-  </Layout>
+    <>
+      <Header></Header>
+      <Layout
+      TitleContent={() => (<></>)}
+      FooterContent={() => (<></>)}
+    >
+      <div>Help</div>
+    </Layout>
+    </>
   )
 }

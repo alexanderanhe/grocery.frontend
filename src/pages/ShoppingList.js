@@ -1,5 +1,7 @@
 import React from 'react';
 import Search from '../components/Search';
+import Header from '../components/Header';
+import Layout from '../components/Layout';
 // import { useLoaderData } from "react-router-dom";
 
 const getShoppingList = async (shoppingListId) => {
@@ -22,7 +24,10 @@ export default function ShoppingList() {
 
   return (
     <>
-      <Search />
+      <Header></Header>
+      <Layout FooterContent={() => <></>}>
+        <Search />
+      </Layout>
     </>
   )
 }
