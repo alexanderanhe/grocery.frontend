@@ -35,9 +35,7 @@ export default function ShoppingLists() {
     <>
       <Header><TitleContent/></Header>
       <Layout FooterContent={FooterContentContainer}>
-        <div
-          className='absolute inset-0 flex flex-col'
-        >
+        <div className='absolute inset-0 flex flex-col overflow-y-auto'>
           <div className='flex-auto'>
             { shoppingLists?.map((item, index) => (
               <h2 key={`item-${index}${item._id}`}>
